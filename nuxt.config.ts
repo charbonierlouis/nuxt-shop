@@ -15,7 +15,6 @@ export default defineNuxtConfig({
         maxAge: CacheDuration.ONE_MINUTE,
         staleMaxAge: CacheDuration.FIVE_MINUTES,
       },
-      prerender: true,
     },
     '/product/:id': {
       swr: CacheDuration.ONE_MINUTE,
