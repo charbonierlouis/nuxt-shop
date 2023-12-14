@@ -10,25 +10,14 @@ export default defineNuxtConfig({
   },
   routeRules: {
     '/': {
-      swr: CacheDuration.ONE_MINUTE,
-      cache: {
-        maxAge: CacheDuration.ONE_MINUTE,
-        staleMaxAge: CacheDuration.FIVE_MINUTES,
-      },
+      swr: CacheDuration.ONE_WEEK,
+      prerender: true,
     },
     '/product/:id': {
-      swr: CacheDuration.ONE_MINUTE,
-      cache: {
-        maxAge: CacheDuration.ONE_MINUTE,
-        staleMaxAge: CacheDuration.ONE_HOUR,
-      },
+      swr: CacheDuration.ONE_WEEK,
     },
     '/category/:id': {
-      swr: CacheDuration.ONE_MINUTE,
-      cache: {
-        maxAge: CacheDuration.ONE_MINUTE,
-        staleMaxAge:CacheDuration.ONE_HOUR
-      },
+      swr: CacheDuration.ONE_WEEK,
     },
   },
   modules: ['@nuxtjs/tailwindcss', '@nuxt/image'],
