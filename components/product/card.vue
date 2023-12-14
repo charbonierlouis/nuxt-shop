@@ -3,6 +3,7 @@ import type { Product } from '@/types';
 
 const { product } = defineProps<{
   product: Product;
+  preload?: boolean;
 }>();
 </script>
 
@@ -14,10 +15,13 @@ const { product } = defineProps<{
       <NuxtImg
         :src="product.image"
         :alt="product.title"
-        :width="300"
-        :height="300"
-        :quality="60"
-        class="p-8 rounded-t-lg aspect-square object-contain"
+        width="300"
+        height="300"
+        quality="60"
+        class="p-8 rounded-t-lg"
+        fit="cover"
+        :preload="preload"
+        placeholder
       />
     </NuxtLink>
     <div class="px-5 pb-5 flex flex-col gap-5 flex-grow w-full justify-between">
