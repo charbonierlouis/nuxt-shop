@@ -21,7 +21,9 @@ export function useCreateCartMutation() {
   return useMutation<Cart>({
     mutationFn,
     onSuccess: (data) => {
-      window?.localStorage?.setItem('cart', JSON.stringify(data));
+      if (process.client) {
+        localStorage?.setItem('cart', JSON.stringify(data));
+      }
       queryClient.setQueryData(cartQueryKeys.cart(data.id), data);
     }
   })

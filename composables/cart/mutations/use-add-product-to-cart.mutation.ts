@@ -56,8 +56,10 @@ export function useAddProductToCartMutation() {
   const queryClient = useQueryClient();
   return useMutation<Cart, Error, AddProductInputs>({
     mutationFn,
-    onSuccess: (data) => {
-      window?.localStorage?.setItem('cart', JSON.stringify(data));
+    onSuccess: (data, variables) => {
+      if (process.client) {
+        localStorage?.setItem('cart', JSON.stringify(data));
+      }
       queryClient.setQueryData(cartQueryKeys.cart(data.id), data);
     },
   });

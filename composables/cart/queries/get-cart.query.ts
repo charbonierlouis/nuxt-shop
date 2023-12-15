@@ -3,7 +3,7 @@ import { cartQueryKeys } from './query-queys';
 import type { Cart } from '@/types';
 
 export function useCartQuery() {
-  const localCart = window?.localStorage?.getItem('cart');
+  const localCart = process.client ? localStorage?.getItem('cart') : null;
   const cartId = localCart ? JSON.parse(localCart).id : null;
   const uri = useApiUrl(cartQueryKeys.cart(cartId || 0));
 
