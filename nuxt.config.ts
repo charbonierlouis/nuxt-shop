@@ -14,7 +14,7 @@ export default defineNuxtConfig({
     async 'nitro:config'(nitroConfig) {
       const uri = `${process.env.NUXT_PUBLIC_API_BASE}/products`
       const products = (await axios.get<Product[]>(uri)).data;
-      const slugs = products.map((product) => `/product/${product.id}`);
+      const slugs = products.map((product) => `/products/${product.id}`);
       nitroConfig.prerender?.routes?.push(...slugs);
     },
   },
