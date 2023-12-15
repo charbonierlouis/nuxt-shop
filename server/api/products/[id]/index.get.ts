@@ -8,8 +8,8 @@ export default defineEventHandler(async (event) => {
     return new Response('Missing id', { status: 400 });
   }
 
-  //wait 10s to simulate a slow response
-  await new Promise((resolve) => setTimeout(resolve, 10000));
+  //wait 5s to simulate a slow response
+  await new Promise((resolve) => setTimeout(resolve, 5000));
 
   const product = await $fetch<Product>(
     useApiUrl(productsQueryKeys.product(params?.id))
