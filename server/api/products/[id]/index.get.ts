@@ -1,5 +1,6 @@
 import { productsQueryKeys } from '~/composables';
 import { useApiUrl } from '~/composables/use-api-url';
+import { Product } from '~/types';
 
 export default defineEventHandler(async (event) => {
   const params = event.context.params;
@@ -10,7 +11,7 @@ export default defineEventHandler(async (event) => {
   //wait 10s to simulate a slow response
   await new Promise((resolve) => setTimeout(resolve, 10000));
 
-  const product = await $fetch(
+  const product = await $fetch<Product>(
     useApiUrl(productsQueryKeys.product(params?.id))
   );
 
@@ -21,8 +22,10 @@ export default defineEventHandler(async (event) => {
   return new Response(
     JSON.stringify(product),
     {
+      status: 200,
       headers: {
         'cache-control': 'public, max-age=60',
+        'content-type': 'application/json',
       }
     }
   );

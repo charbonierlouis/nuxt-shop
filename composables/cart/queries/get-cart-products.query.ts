@@ -1,6 +1,5 @@
 import type { Product } from '~/types';
 import { useQueries } from '@tanstack/vue-query';
-import { useFrontApiUrl } from '~/composables/use-api-url';
 
 export function useCartProductsQuery() {
   const cartStore = useCartStore();
@@ -9,7 +8,7 @@ export function useCartProductsQuery() {
     queryKey: productsQueryKeys.product(product.productId.toString()),
     queryFn: () =>
       $fetch<Product>(
-        useFrontApiUrl(productsQueryKeys.product(product.productId.toString()))
+        useFrontApiUrl(productsQueryKeys.product(product.productId.toString()),)
       ),
   }));
 
