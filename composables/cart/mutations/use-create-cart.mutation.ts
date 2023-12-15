@@ -17,6 +17,7 @@ function mutationFn() {
 
 export function useCreateCartMutation() {
   const queryClient = useQueryClient();
+  const cartStore = useCartStore();
 
   return useMutation<Cart>({
     mutationFn,
@@ -24,6 +25,7 @@ export function useCreateCartMutation() {
       if (process.client) {
         localStorage?.setItem('cart', JSON.stringify(data));
       }
+      cartStore.setCart(data);
       queryClient.setQueryData(cartQueryKeys.cart(data.id), data);
     }
   })

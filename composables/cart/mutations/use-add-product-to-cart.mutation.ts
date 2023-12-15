@@ -2,6 +2,7 @@ import type { Cart, Product } from '@/types';
 import { useMutation, useQueryClient } from '@tanstack/vue-query';
 
 export type AddProductInputs = {
+  cart: Cart | null;
   product: Product;
   quantity: number;
 };
@@ -35,31 +36,33 @@ function addProduct(cart: Cart, product: Product, quantity: number): Cart {
   };
 }
 
-function mutationFn({ product, quantity }: AddProductInputs) {
+function mutationFn({ cart, product, quantity }: AddProductInputs) {
   const uri = useApiUrl(['carts']);
-  const cart = localStorage.getItem('cart');
-  const parsedCart: Cart | null = cart ? JSON.parse(cart) : null;
 
-  if (!parsedCart) {
+  if (!cart) {
     throw new Error('Cart not found');
   }
 
   return $fetch<Cart>(uri, {
     method: 'POST',
     body: JSON.stringify({
-      products: addProduct(parsedCart, product, quantity).products,
+      products: addProduct(cart, product, quantity).products,
     }),
   });
 }
 
 export function useAddProductToCartMutation() {
   const queryClient = useQueryClient();
+  const cartStore = useCartStore();
+
   return useMutation<Cart, Error, AddProductInputs>({
-    mutationFn,
-    onSuccess: (data, variables) => {
+    mutationFn: (props: Omit<AddProductInputs, 'cart'>) =>
+      mutationFn({ ...props, cart: cartStore.cart }),
+    onSuccess: (data) => {
       if (process.client) {
         localStorage?.setItem('cart', JSON.stringify(data));
       }
+      cartStore.setCart(data);
       queryClient.setQueryData(cartQueryKeys.cart(data.id), data);
     },
   });

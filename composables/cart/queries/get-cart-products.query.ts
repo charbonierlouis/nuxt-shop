@@ -3,9 +3,9 @@ import { useCartQuery } from './get-cart.query';
 import { useQueries } from '@tanstack/vue-query';
 
 export function useCartProductsQuery() {
-  const { data: cart } = useCartQuery();
+  const cartStore = useCartStore();
 
-  const cartProductsQueries = cart?.value?.products.map((product) => ({
+  const cartProductsQueries = cartStore.cart?.products.map((product) => ({
     queryKey: productsQueryKeys.product(product.productId.toString()),
     queryFn: () =>
       $fetch<Product>(
