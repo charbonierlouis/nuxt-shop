@@ -1,6 +1,7 @@
 import { productsQueryKeys } from '~/composables';
 import { useApiUrl } from '~/composables/use-api-url';
 import { Product } from '~/types';
+import { CacheDuration } from '~/types/cache-duration';
 
 export default defineEventHandler(async (event) => {
   const params = event.context.params;
@@ -24,7 +25,7 @@ export default defineEventHandler(async (event) => {
     {
       status: 200,
       headers: {
-        'cache-control': 'public, max-age=60',
+        'cache-control': `max-age=0 s-maxage=${CacheDuration.ONE_MINUTE}, stale-while-revalidate=${CacheDuration.ONE_HOUR}`,
         'content-type': 'application/json',
       }
     }
