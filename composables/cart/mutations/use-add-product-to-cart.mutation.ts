@@ -57,7 +57,7 @@ export function useAddProductToCartMutation() {
   return useMutation<Cart, Error, AddProductInputs>({
     mutationFn,
     onSuccess: (data) => {
-      localStorage.setItem('cart', JSON.stringify(data));
+      window?.localStorage?.setItem('cart', JSON.stringify(data));
       queryClient.setQueryData(cartQueryKeys.cart(data.id), data);
     },
   });
