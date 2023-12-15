@@ -1,4 +1,4 @@
-import { CacheDuration } from "./types/cache-duration";
+import { CacheDuration } from './types/cache-duration';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -20,5 +20,5 @@ export default defineNuxtConfig({
       swr: CacheDuration.ONE_WEEK,
     },
   },
-  modules: ['@nuxtjs/tailwindcss', '@nuxt/image'],
+  modules: ['@nuxtjs/tailwindcss', '@nuxt/image', 'nuxt-icon', '@pinia/nuxt'],
 });
