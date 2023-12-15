@@ -23,11 +23,11 @@ export default defineNuxtConfig({
       swr: CacheDuration.ONE_WEEK,
       prerender: true,
     },
-    '/product/:id': {
+    '/products/:id': {
       swr: CacheDuration.ONE_WEEK,
       prerender: true,
     },
-    '/category/:id': {
+    '/categories/:id': {
       swr: CacheDuration.ONE_WEEK,
     },
   },
