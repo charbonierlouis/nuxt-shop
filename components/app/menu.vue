@@ -15,7 +15,9 @@
       <div
         class="flex items-center md:order-2 space-x-1 md:space-x-2 rtl:space-x-reverse"
       >
+      <ClientOnly>
         <AppCartButton />
+      </ClientOnly>
       </div>
     </div>
   </nav>

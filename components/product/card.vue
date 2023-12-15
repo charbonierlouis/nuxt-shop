@@ -36,7 +36,9 @@ const { product } = defineProps<{
         <span class="text-3xl font-bold text-gray-900 dark:text-white"
           >{{ product.price }}€</span
         >
-        <CartAddButton :product="product" />
+        <ClientOnly>
+          <CartAddButton :product="product" />
+        </ClientOnly>
       </div>
     </div>
   </div>
