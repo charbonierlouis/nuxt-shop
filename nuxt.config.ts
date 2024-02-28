@@ -23,11 +23,9 @@ export default defineNuxtConfig({
   routeRules: {
     '/': {
       swr: CacheDuration.ONE_WEEK,
-      prerender: true,
     },
     '/products/:id': {
       swr: CacheDuration.ONE_WEEK,
-      prerender: true,
     },
     '/categories/:id': {
       swr: CacheDuration.ONE_WEEK,
